@@ -1,0 +1,6 @@
+#!/bin/sh
+
+gconftool-2  --type string -s  /system/proxy/mode "manual"
+gconftool-2  --type string -s /system/proxy/socks_host "127.0.0.1"
+gconftool-2  --type int -s /system/proxy/socks_port "9999"
+

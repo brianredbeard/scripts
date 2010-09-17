@@ -1,0 +1,3 @@
+#!/bin/sh
+
+gconftool-2   --type string -s  /system/proxy/mode "none"

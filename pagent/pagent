@@ -1,0 +1,60 @@
+#!/usr/bin/perl
+
+use Crypt::CBC;
+use DB_File;
+use Getopt::Long;
+use Term::ReadPassword;
+
+Getopt::Long::Configure ("bundling");
+
+$result = GetOptions ("delete|d" => \$delete,
+                      "list|l"   => \$list,
+                      "set|s"    => \$set,
+		      "user|u=s" => \$user,
+		      "help|h"   => \$help,
+                      "dump|p"   => \$dump);
+
+$server = $ARGV[0];
+
+if ($user) {
+    tie %hash, 'DB_File', "/usr/home/$user/.pagent.db";
+} else {
+    tie %hash, 'DB_File', "$ENV{HOME}/.pagent.db";
+}
+
+
+if ($delete) {
+    delete $hash{$server};
+} elsif ($list) {
+    for my $key (sort keys %hash) {
+        print $key, "\n";
+    }
+} elsif ($set) {
+    my $passwd = read_password('pagent password: ');
+    $cipher = new Crypt::CBC($passwd, 'Twofish');
+    my $system_passwd = read_password("$server password: ");
+
+    $hash{$server} = $cipher->encrypt($system_passwd);
+} elsif ($server) {
+    my $passwd = read_password('pagent password: ');
+    $cipher = new Crypt::CBC($passwd, 'Twofish');
+    print $cipher->decrypt($hash{$server}), "\n";
+} elsif ($dump) {
+    my $passwd = read_password('pagent password: ');
+    $cipher = new Crypt::CBC($passwd, 'Twofish');
+    foreach my $key ( sort keys %hash ) {
+        print "$key\t", $cipher->decrypt($hash{$key}), "\n";
+    }
+} elsif ($server eq '') {
+    @progs =  split '/', $0;
+    $progname = pop @progs;
+    
+    print "Usage: $progname [-dls --delete --list --set] [-u | --user <user>] <machine or service>\n",
+          "  -d | --delete       Deletes machine or service from database\n",
+	  "  -h | --help         Shows this information\n",
+	  "  -l | --list         Lists machines and services you have passwords for\n",
+          "  -s | --set          Sets password for machine or service\n",
+	  "  -u | --user <user>  Uses <user>'s pagent file\n",
+          "  -p | --dump         Dumps server and password list\n",
+	  "  no option:          Shows the password for the selected machine or service\n";
+}
