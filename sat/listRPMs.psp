@@ -1,0 +1,61 @@
+<%
+#!/usr/bin/python
+# This script was written by Brian Redbeard
+# Last update 2010-12-14
+# This script is NOT SUPPORTED by ANYONE. Please
+# contact Dan Poler for more information.
+
+import xmlrpclib
+from mod_python import util
+
+SATELLITE_URL = "https://satellite.dev.alticon.net/rpc/api"
+SATELLITE_LOGIN = "apiuser"
+SATELLITE_PASSWORD = "apiuser"
+packagelist = ""
+totalhost = ""
+
+if form.has_key('hostname'):
+	hostname=str(form['hostname'])
+	if len(hostname) > 0:
+		client = xmlrpclib.Server(SATELLITE_URL, verbose=0)
+		key = client.auth.login(SATELLITE_LOGIN, SATELLITE_PASSWORD)
+		list = client.system.search.nameAndDescription(key, hostname)
+		if len(list) > 0:
+
+			for system in list:
+			   name = system.get('name')
+			   hname = system.get('hostname')
+			   print "name:  %s" % name
+			   packages = client.system.listPackages(key, system.get('id'))
+			   id = str(system['id'])
+			   for package in packages:
+				if package['arch'] == 'AMD64':
+					arch = 'x86_64'
+				else:
+					arch = package['arch']
+
+				packagename = "%s-%s-%s.%s" % (package['name'],package['version'],package['release'],arch)
+
+				packagelist = packagelist + "\n  " + packagename
+
+			totalhost = totalhost + "<h1>%s (%s)</h1>\n<pre>%s</pre>" % (name, hname,packagelist)
+			packagelist = ''
+		else:
+			totalhost = "No hosts matching search term returned"
+		client.auth.logout(key)
+	else:
+		totalhost = "Zero length search term provided"
+
+else:
+	totalhost = "No search term provided"
+	hostname = "error"
+
+%><html>
+<head>
+<title>Package Listing for search term <%=hostname%>
+</title>
+</head>
+<body>
+<%=totalhost%>
+</body>
+</html>
