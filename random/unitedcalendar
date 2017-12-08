@@ -1,0 +1,11 @@
+#!/bin/bash
+
+if [ "${1}x" == "x" ]; then
+    echo "Must supply calendar file"
+    exit 1
+fi
+
+
+sed -i -e 's/End/END/g' -e 's/=0D/\n/g' ${1}
+
+
