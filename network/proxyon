@@ -1,0 +1,6 @@
+#!/bin/bash
+
+if [ "$1XX" != "XX" ]; then
+	dconf  write /system/proxy/socks/port "$1"
+fi
+dconf  write /system/proxy/mode "'manual'"

@@ -1,0 +1,4 @@
+#!/bin/bash
+
+dconf  write /system/proxy/socks/port "9999"
+dconf  write /system/proxy/mode "'none'"
