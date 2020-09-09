@@ -98,7 +98,7 @@ The following is a list of the functions provided by this script:
 
 ## Copyright
 
-This script is originally copyrighted 2014, [Jason Emery][jason-emery-linkedin]
+This script is originally copyrighted 2013, [Jason Emery][jason-emery-linkedin]
 with modifications made by Brian 'redbeard' Harrington in 2020.
 
 [jason-emery-linkedin]: https://www.linkedin.com/in/jasonemery/
