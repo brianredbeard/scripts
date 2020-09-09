@@ -10,7 +10,9 @@
  * Sample Spreadsheet:
  * https://docs.google.com/spreadsheet/ccc?key=0AtvdVN89Xo5KdEhSaWctWTV1d1RpQUt1TTF1blFtVnc&usp=sharing
  *
- * Last update 8/18/2016 with new onOpen function
+ * Update:
+ *  - 8/18/2016 with new onOpen function
+ *  - 9/9/2020 change help dialog behavior 
  */
 
 
@@ -29,18 +31,14 @@ function onOpen() {
 }
 
 
+
 function OPEN_HELP(){
-  var href = "https://docs.google.com/document/d/18uB0Cbs37WOe1C-em5Rae6Hu8y5rUOvrMo2MoOyVlG4/edit?usp=sharing"
-  var title = "IP Functions Help"
-  var app = UiApp.createApplication().setHeight(50).setWidth(200);
-  app.setTitle(title);
-  var link = app.createAnchor("OPEN HELP FILE", href).setId("link");
-  app.add(link);  
-  var doc = SpreadsheetApp.getActive();
-  doc.show(app);
+  var html = HtmlService.createHtmlOutputFromFile('IPFunctionsHelpFile')
+    .setTitle("IP Functions Help")
+    .setWidth(600);
+
+  SpreadsheetApp.getUi().showSidebar(html);
 }
-
-
 
 
 
