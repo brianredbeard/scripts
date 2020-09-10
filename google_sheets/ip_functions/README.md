@@ -19,6 +19,21 @@ This is a copy of the Google AppScript function which has been ported to use the
 The original [Google Sheets Demo][originalscript] is still available and can be
 reviewed for reference.
 
+## Installation
+
+Installation of this utility is pretty simple:
+
+  - [Create a new Google Sheet](https://sheets.new)
+  - Click "Tools" -> "Script Editor"
+  - In the new dialog you should be in a web based IDE editor in the file
+    `Code.gs`.  Copy/paste the file Code.gs into this one.
+  - Click "File" -> "New" -> "HTML File" named `IPFunctionsHelpFile.html` and
+    copy/paste the contents of `IPFunctionsHelpFile.html`.
+  - Save the project (I make the name the same as the spreadsheet as this will
+    be attached to a single spreadsheet).
+  - Go back to your spreadsheet, do a forced reload, and wait a moment.  A new
+    dialog menu named "IPFunctions" should appear after "Help".
+
 ## Functions
 
 ### Summary
