@@ -43,58 +43,128 @@ The following is a list of the functions provided by this script:
   - `IPDD2BIN (ip)`
   - `IPDD2DEC (ip)`
   - `IPBIN2DD (ip)`
-  - `IPSORT ()`
-  - `SUBNETFILL ()`
-  - `IPFILL_UTIL ()`
-  - `TOLOWER ()`
-  - `REMOVE_FORMULAS ()`
+  - `SUBNETFILL`
+  - `IPSORT`
+  - `TOLOWER`
+  - `REMOVE_FORMULAS`
 
-### IPFILL (ip)
+#### IPFILL (ip)
 
-### IPNETWORK(ip)
+Takes an ip/mask in CIDR notation and returns an array in the same column of all
+hosts enumerated in the subnet.
 
-### IPNEXTNET (ip)
+#### IPNETWORK(ip)
 
-### IPISIN (ip1, ip2)
+Takes an ip/mask in CIDR notation and returns the network address.
 
-### IPBROADCAST (ip)
+#### IPNEXTNET (ip)
 
-### IPMASKLEN (ip)
+Takes an ip/mask in CIDR notation and returns the next matching network with the
+same subnet mask.
 
-### IPMASK (ip)
+#### IPISIN (ip1, ip2)
 
-### IPMASKWILD (ip)
+Returns true if ip1 is contained within ip2. Ip2 must be an ip with subnet mask
+in CIDR notation. Ip1 can be either a single ip address or a subnet in CIDR
+notation.
 
-### IPHOSTS (ip)
+#### IPBROADCAST (ip)
 
-### IPADD(ip, x)
+Takes an ip/mask in CIDR notation and returns the broadcast address.
 
-### IPOCTET (ip,octet)
+#### IPMASKLEN (ip)
 
-### IPADDR (ip)
+Takes an ip/mask in CIDR notation and returns only the mask length.
 
-### IPVALID (ip)
+#### IPMASK (ip)
 
-### IPDEC2DD (ip)
+Takes an ip/mask in CIDR notation and returns the mask value in dotted decimal,
+such as 255.255.255.0.
 
-### IPDD2HEX(ip)
+#### IPMASKWILD (ip)
 
-### IPDD2BIN (ip)
+Calculate the wildcard subnet mask of a given CIDR block.
 
-### IPDD2DEC (ip)
+#### IPHOSTS (ip)
 
-### IPBIN2DD (ip)
+Takes an ip/mask in CIDR notation and returns the number of available hosts.
 
-### IPSORT ()
+#### IPADD(ip, x)
 
-### SUBNETFILL ()
+Takes an IP address and adds an integer. This will work across subnet
+boundaries. If no integer is provided, it will increment the IP by 1.
 
-### IPFILL_UTIL ()
+#### IPOCTET (ip,octet)
 
-### TOLOWER ()
+Takes an IP address with or without CIDR notation and returns the specific octet
+specified by ‘octet’. If no octet is specified, it will return an array with all
+4 octets.
 
-### REMOVE_FORMULAS ()
+#### IPADDR (ip)
 
+Takes an IP/mask in CIDR notation and returns just the IP address.
+
+#### IPVALID (ip)
+
+_Note_: Reviewing the code, this seems to be a no-op function.
+
+#### IPDEC2DD (ip)
+
+Converts decimal number to IP address in dotted decimal notation.
+
+#### IPDD2HEX(ip)
+
+Converts IP in dotted decimal notation to HEX string.
+
+#### IPDD2BIN (ip)
+
+Converts an IP address in dotted decimal notation to 32-bit binary (0’s and 1’s
+string).
+
+#### IPDD2DEC (ip)
+
+Converts IP in dotted decimal notation to decimal number. Useful for sorting and
+mathematical operations.
+
+#### IPBIN2DD (ip)
+
+Converts 32-bit binary (0’s and 1’s string) to an IP address in dotted decimal
+notation.
+
+### Menu functions
+
+These mechanisms are exposed through the menu bar at the top of the document
+window.
+
+#### SUBNETFILL
+
+Similar to IP FILL above except it will fill the subnets incrementally but only
+works if a range is selected. For example if 10.10.10.0/26 is selected, it will
+fill the sleected range of cells with 10.10.10.64/26, 10.10.10.128/26 etc...
+This will work fur subnets and supernets it does not care.
+
+#### IPSORT
+
+Will take a selected range of ip addresses and sort them by IP address. This is
+very useful such as:
+
+|Normal Sort:|IP Sort:|
+|----|----|
+|10.10.10.1|10.10.10.1|
+|10.10.10.10|10.10.10.2|
+|10.10.10.15|10.10.10.10|
+|10.10.10.2|10.10.10.15|
+
+#### TOLOWER
+
+Converts the selected range to all lower case.
+
+#### REMOVE_FORMULAS
+
+Removes all formulas from the selected range. Especially useful with google
+sheets where performance can be seriously impacted by too many formulas. Also
+useful when copying and pasting data to another spreadsheet to get rid of
+formulas.
 
 ## Copyright
 
