@@ -6,7 +6,15 @@ scripts are supplied without warranty, expressed or implied.
 
 # VMWare Virtual Distributed Switch USB Configurator
 
-Filename: `persist_vds_usb.sh`
+| Filename |
+| ---- | 
+| `persist_vds_usb.sh` |
+
+_This script was inspired by [Alexander Kewitz][ak-twitter] after reading his
+blog post "[Multiple persistent USB NIC bindings for Intel NUCs on ESXi
+7][ak-blog]".  In the environment I'm using there were a different number of
+nics and I wanted to consolidate all areas of configuration to a single part of
+the script._
 
 Using this script an administrator can configure the bindings between USB
 network interfaces and distributed switch ports.  In various versions of VMWare
@@ -51,7 +59,8 @@ virtual switch `vds-production` and `vusb1` which we wish to connect to "port"
 cfgNic vusb0 vds-production 10
 cfgNic vusb1 vds-vmotion 3
 ```
-
+[ak-twitter]: https://twitter.com/KewitzAlexander
+[ak-blog]: https://hybrid-cloud.blog/multiple-persistent-usb-nic-bindings-for-intel-nucs-on-esxi-7/
 [USB Fling]: https://flings.vmware.com/usb-network-native-driver-for-esxi
 [set]: https://wiki.bash-hackers.org/commands/builtin/set
 <!--
