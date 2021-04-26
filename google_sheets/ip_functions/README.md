@@ -19,9 +19,13 @@ This is a copy of the Google AppScript function which has been ported to use the
 The original [Google Sheets Demo][originalscript] is still available and can be
 reviewed for reference.
 
-## Installation
+An updated version of the demo focused around the addressing of multi-site
+network configuration can be [explored here][newdemo].
 
-Installation of this utility is pretty simple:
+## Installation (Basic)
+
+Installation of this utility is pretty simple.  The functions can be added to a
+new or existing Google Sheets document.  These directions 
 
   - [Create a new Google Sheet](https://sheets.new)
   - Click "Tools" -> "Script Editor"
@@ -32,7 +36,33 @@ Installation of this utility is pretty simple:
   - Save the project (I make the name the same as the spreadsheet as this will
     be attached to a single spreadsheet).
   - Go back to your spreadsheet, do a forced reload, and wait a moment.  A new
-    dialog menu named "IPFunctions" should appear after "Help".
+    menu bar item named "IPFunctions" should appear after "Help".
+  - Test the functions:
+    - In cell A1 add the content `192.168.0.25/24`
+    - In cell A2 enter the following: `=IPBROADCAST(A1)` (the result should be
+      `192.168.0.255`)
+    - In cell A3 enter the following: `=IPADD(A1, 300)` (the result should be
+      `192.168.1.69`)
+    - In cell A4 enter the following: `=IPDD2DEC(A3)` (the result should be
+      `3232235845`)
+    - In cell A5 enter the following: `=IPDEC2DD(A4)` (the result should be
+      `192.168.1.69`)
+
+
+### Menu functions
+
+Within Google AppScript/Google Sheets, accessing the Menu bar requires
+additional OAUTH scoped permissions.  Users who need use these functions will
+need to authorize the application.  This prompt will happen automatically upon
+the first use of a menu based function.
+
+
+   - Test the menu operations:
+      - In cell B1 enter `192.168.224.224/28`
+      - Select cells B1 through B4
+      - Click "IPFunctions" -> "Subnet Fill" (the result should be the next 3
+        subnets, listed in order, filled down in the selected cells.  In this
+        case: "192.168.224.240/28", "192.168.225.0/28", "192.168.225.16/28")
 
 ## Functions
 
@@ -190,6 +220,7 @@ with modifications made by Brian 'redbeard' Harrington in 2020.
 [uiapp]: https://developers.google.com/apps-script/guides/support/sunset#ui-service
 [htmlservice]: https://developers.google.com/apps-script/reference/html/html-service?hl=en
 [originalscript]: https://docs.google.com/spreadsheets/d/18j7NB1yBjrkmeIay-I4hPqck75LHt5LzObFcucQnSeQ/edit#gid=0
+[newdemo]: https://docs.google.com/spreadsheets/d/1rpMCHwBE2HezmyckixBBpZJmK8xBL8z5TLhW4omKtSs/edit#gid=0
 
 <!--
 vim: ts=2 sw=2 et tw=80
